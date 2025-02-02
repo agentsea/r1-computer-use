@@ -1,0 +1,18 @@
+[project]
+name = "r1-computer-use"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pyright]
+reportUnknownParameterType = false
+reportMissingTypeArgument = false
+reportUnknownMemberType = false
+reportUnknownVariableType = false
+reportUnknownArgumentType = false
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
