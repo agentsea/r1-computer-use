@@ -93,8 +93,8 @@ MIT
 ## Citation
 
 @software{r1_computer_use,
-  title={R1-Computer-Use: Reasoning-First Computer Interaction},
-  author={Patrick Barker},
-  year={2025},
-  url={https://github.com/agentsea/r1-computer-use}
+  title     = {R1-Computer-Use: Reasoning-First Computer Interaction},
+  author    = {Barker, Patrick},
+  year      = {2025},
+  url       = {https://github.com/agentsea/r1-computer-use},
 }
