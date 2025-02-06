@@ -4,11 +4,11 @@ Applying the ideas of [Deepseek R1](https://github.com/deepseek-ai/DeepSeek-R1) 
 
 ## Overview
 
-r1-computer-use is an experimental project that applies large-scale Reinforcement Learning techniques—similar to those outlined in DeepSeek-R1 to computer usage scenarios. The primary goal is to train an agent to interact with a computer environment (e.g., file system, web browser, command line) while utilizing a neural reward model to validate the correctness of the agent’s actions and reason about intermediate steps.
+r1-computer-use is an experimental project that applies large-scale Reinforcement Learning techniques similar to DeepSeek-R1 to computer usage scenarios. The primary goal is to train an agent to interact with a computer environment (e.g., file system, web browser, command line) while utilizing a neural reward model to validate the correctness of the agent’s actions and reason about intermediate steps.
 
 ## Architecture
 
-DeepSeek-R1 has shown that large language models can develop powerful reasoning skills through iterative reward optimization. Traditionally, such projects rely on hard verifiers or rule-based scripts to determine correctness in tasks like math or coding. However, these methods can be too narrow for more general, open-ended tasks such as “using a computer.”
+DeepSeek-R1 has shown that large language models can develop powerful reasoning skills through iterative reward optimization. Traditionally, such projects rely on hard verifiers or rule-based scripts to determine correctness in tasks like math or coding. However, these methods are too difficult to reproduce at scale for general computer usage.
 
 We aim to replace hard-coded verifiers with a neural reward model that itself reasons about whether or not the agent’s actions are correct or helpful.
 
