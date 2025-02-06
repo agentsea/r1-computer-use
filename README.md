@@ -90,29 +90,17 @@ The training pipeline implements Group Relative Policy Optimization (GRPO) in mu
    - Create new training dataset from best examples
    - Fine-tune base model on filtered data
 
-4. **General GRPO**
-   - Apply GRPO to full task distribution
-   - Balance reasoning and task completion
-   - Optimize reward model in parallel
-
-Key training parameters:
-```python
-training_config = {
-    'cold_start_steps': 10000,
-    'grpo_batch_size': 16,
-    'grpo_epochs': 1000,
-    'rejection_sampling_threshold': 0.8,
-    'kl_target': 0.01,
-    'max_grad_norm': 1.0
-}
-```
+4. **General Preference Alignment**
+   - Apply RL to full task distribution
+   - Use reward models for general preferences
+   - Focus on helpfulness and safety
+   - Evaluate complete responses
 
 5. **Evaluation**
    - Task completion metrics
    - Reasoning quality assessment 
    - Safety verification
    - Distribution shift analysis
-
 
 
 ## Research
