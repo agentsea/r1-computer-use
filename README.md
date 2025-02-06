@@ -10,7 +10,7 @@ R1-Computer-Use implements a novel architecture where both actor and reward mode
 
 ## Architecture
 
-Both models follow a three-step cycle which can be seen as an extention of ReACT into reinforcement learning.
+Both models follow a three-step cycle which can be seen as an extention of [ReACT](https://react-lm.github.io/) into reinforcement learning.
 
 <img src="./static/rac.svg" alt="diagram" width="500">
 
