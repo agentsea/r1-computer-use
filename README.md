@@ -59,7 +59,7 @@ feedback = reward_model.evaluate(
 
 ## Training
 
-The training pipeline implements Group Relative Policy Optimization (GRPO) in multiple stages:
+The training pipeline consists of multiple stages:
 
 1. **Cold Start**
    - Expert demonstrations with reasoning traces
@@ -67,23 +67,11 @@ The training pipeline implements Group Relative Policy Optimization (GRPO) in mu
    - Base model fine-tuning
 
 2. **Reasoning-Focused GRPO**
-   ```python
-   # Generate group of solutions for each task
-   solutions = agent.generate_solutions(task, n_samples=16)
-   
-   # Calculate advantages using reward model
-   advantages = reward_model.batch_evaluate(solutions)
-   advantages = (advantages - advantages.mean()) / advantages.std()
-   
-   # Update policy using GRPO
-   loss = grpo_update(
-       policy=agent,
-       solutions=solutions,
-       advantages=advantages,
-       clip_ratio=0.2,
-       reference_kl=0.1
-   )
-   ```
+   - Group-based sampling from current policy
+   - Reward model evaluates each group
+   - Compute advantages within groups
+   - Policy updates with clipped probability ratios
+   - KL divergence constraint with reference policy
 
 3. **Rejection Sampling Stage**
    - Filter top-k solutions based on reward model
