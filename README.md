@@ -1,4 +1,4 @@
-# r1-computer-use
+# R1 Computer Use
 
 Applying the ideas of [Deepseek R1](https://github.com/deepseek-ai/DeepSeek-R1) and [Open R1](https://github.com/huggingface/open-r1) to computer use.
 
@@ -59,25 +59,59 @@ feedback = reward_model.evaluate(
 
 ## Training
 
-The training process focuses on developing strong reasoning patterns:
+The training pipeline implements Group Relative Policy Optimization (GRPO) in multiple stages:
 
-### Cold Start
+1. **Cold Start**
+   - Expert demonstrations with reasoning traces
+   - Initial reward model training
+   - Base model fine-tuning
 
-- Expert demonstrations with reasoning traces
-- Initial reward model training
+2. **Reasoning-Focused GRPO**
+   ```python
+   # Generate group of solutions for each task
+   solutions = agent.generate_solutions(task, n_samples=16)
+   
+   # Calculate advantages using reward model
+   advantages = reward_model.batch_evaluate(solutions)
+   advantages = (advantages - advantages.mean()) / advantages.std()
+   
+   # Update policy using GRPO
+   loss = grpo_update(
+       policy=agent,
+       solutions=solutions,
+       advantages=advantages,
+       clip_ratio=0.2,
+       reference_kl=0.1
+   )
+   ```
 
+3. **Rejection Sampling Stage**
+   - Filter top-k solutions based on reward model
+   - Create new training dataset from best examples
+   - Fine-tune base model on filtered data
 
-### Reinforcement
+4. **General GRPO**
+   - Apply GRPO to full task distribution
+   - Balance reasoning and task completion
+   - Optimize reward model in parallel
 
-- Rejection sampling on reasoning quality
-- Dual model improvement loop
+Key training parameters:
+```python
+training_config = {
+    'cold_start_steps': 10000,
+    'grpo_batch_size': 16,
+    'grpo_epochs': 1000,
+    'rejection_sampling_threshold': 0.8,
+    'kl_target': 0.01,
+    'max_grad_norm': 1.0
+}
+```
 
-
-### Evaluation
-
-- Task completion metrics
-- Reasoning quality assessment
-- Safety verification
+5. **Evaluation**
+   - Task completion metrics
+   - Reasoning quality assessment 
+   - Safety verification
+   - Distribution shift analysis
 
 
 
@@ -92,9 +126,11 @@ MIT
 
 ## Citation
 
+```bibtex
 @software{r1_computer_use,
   title     = {R1-Computer-Use: Reasoning-First Computer Interaction},
   author    = {Barker, Patrick},
   year      = {2025},
   url       = {https://github.com/agentsea/r1-computer-use},
 }
+```
